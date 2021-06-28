@@ -1,3 +1,4 @@
+import string
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -56,6 +57,14 @@ def join():
 	driver.find_element_by_css_selector(
         'div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()
 
+def exit():
+	time.sleep(5)
+	while int(driver.find_element_by_xpath("//div[@class='uGOf1d']").text)>1:
+		print(time.strftime("%X"))
+	
+	driver.close()
+
+
 # Main
 print('\nSession started!\n')
 
@@ -92,5 +101,6 @@ login(args.email, args.password)
 turn_off_mic_cam()
 
 join()
+exit()
 
 print('\nSession ended!')
