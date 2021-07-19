@@ -1,9 +1,7 @@
-import string
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 import time
 import argparse
@@ -37,6 +35,7 @@ def login(mail_address, password):
 
 def turn_off_mic_cam():
 	time.sleep(1)
+
 	WebDriverWait(driver, 10).until(EC.url_contains(("meet.google.com")))
 
 	# Turns off Microphone
@@ -58,12 +57,11 @@ def join():
         'div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()
 
 def exit():
-	time.sleep(5)
-	while int(driver.find_element_by_xpath("//div[@class='uGOf1d']").text)>1:
+	time.sleep(600)
+	while int(driver.find_element_by_xpath("//div[@class='uGOf1d']").text) > 30:
 		print(time.strftime("%X"))
 	
 	driver.close()
-
 
 # Main
 print('\nSession started!\n')
@@ -76,7 +74,6 @@ print(f'Description: {args.desc}')
 opt = Options()
 opt.add_argument('--disable-blink-features=AutomationControlled')
 opt.add_argument('--start-maximized')
-
 opt.add_experimental_option("excludeSwitches", [
 	"disable-popup-blocking"
 ])
@@ -100,7 +97,8 @@ login(args.email, args.password)
 
 turn_off_mic_cam()
 
-join()
-exit()
+# join()
+
+# exit()
 
 print('\nSession ended!')
